@@ -30,19 +30,21 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2017 "Valentin Popov" <info@valentineus.link>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class local_webhooks_events {
+class local_webhooks_events
+{
     /**
      * Call the event when creating a backup.
      *
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function backup_performed() {
+    public static function backup_performed()
+    {
         $context = context_system::instance();
 
         $event = local_webhooks\event\backup_performed::create(
             array(
-                'context'  => $context,
+                'context' => $context,
                 'objectid' => 0,
             )
         );
@@ -56,12 +58,13 @@ class local_webhooks_events {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function backup_restored() {
+    public static function backup_restored()
+    {
         $context = context_system::instance();
 
         $event = local_webhooks\event\backup_restored::create(
             array(
-                'context'  => $context,
+                'context' => $context,
                 'objectid' => 0,
             )
         );
@@ -78,7 +81,8 @@ class local_webhooks_events {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function response_answer($objectid = 0, array $response = array()) {
+    public static function response_answer($objectid = 0, array $response = array())
+    {
         $context = context_system::instance();
 
         $status = 'Error sending request';
@@ -88,9 +92,9 @@ class local_webhooks_events {
 
         $event = local_webhooks\event\response_answer::create(
             array(
-                'context'  => $context,
+                'context' => $context,
                 'objectid' => $objectid,
-                'other'    => array('status' => $status),
+                'other' => array('status' => $status),
             )
         );
 
@@ -105,7 +109,8 @@ class local_webhooks_events {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function service_added($objectid = 0) {
+    public static function service_added($objectid = 0)
+    {
         $context = context_system::instance();
 
         $event = local_webhooks\event\service_added::create(
@@ -123,7 +128,8 @@ class local_webhooks_events {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function service_deleted($objectid = 0) {
+    public static function service_deleted($objectid = 0)
+    {
         $context = context_system::instance();
 
         $event = local_webhooks\event\service_deleted::create(
@@ -141,7 +147,8 @@ class local_webhooks_events {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public static function service_updated($objectid = 0) {
+    public static function service_updated($objectid = 0)
+    {
         $context = context_system::instance();
 
         $event = local_webhooks\event\service_updated::create(

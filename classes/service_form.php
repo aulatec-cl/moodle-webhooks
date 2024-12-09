@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir . '/formslib.php');
+require_once $CFG->libdir . '/formslib.php';
 
 /**
  * Description of the form of restoration.
@@ -32,14 +32,16 @@ require_once($CFG->libdir . '/formslib.php');
  * @copyright 2017 "Valentin Popov" <info@valentineus.link>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class service_backup_form extends moodleform {
+class service_backup_form extends moodleform
+{
     /**
      * Defines the standard structure of the form.
      *
      * @throws \coding_exception
      */
-    protected function definition() {
-        $mform =& $this->_form;
+    protected function definition()
+    {
+        $mform = &$this->_form;
 
         /* Form heading */
         $mform->addElement('header', 'editserviceheader', new lang_string('restore', 'moodle'));
@@ -59,14 +61,16 @@ class service_backup_form extends moodleform {
  * @copyright 2017 "Valentin Popov" <info@valentineus.link>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class service_edit_form extends moodleform {
+class service_edit_form extends moodleform
+{
     /**
      * Defines the standard structure of the form.
      *
      * @throws \coding_exception
      */
-    protected function definition() {
-        $mform =& $this->_form;
+    protected function definition()
+    {
+        $mform = &$this->_form;
         $size = ['size' => 60];
 
         /* Form heading */
@@ -88,6 +92,14 @@ class service_edit_form extends moodleform {
         $mform->setDefault('enable', 1);
         $mform->setAdvanced('enable');
 
+        /* Auth Header Name */
+        $mform->addElement('text', 'auth_header_name', new lang_string('auth_header_name', 'webservice'), $size);
+        $mform->setType('auth_header_name', PARAM_NOTAGS);
+
+        /* Auth Token */
+        $mform->addElement('text', 'auth_token', new lang_string('auth_token', 'webservice'), $size);
+        $mform->setType('auth_token', PARAM_NOTAGS);
+
         /* Token */
         $mform->addElement('text', 'token', new lang_string('token', 'webservice'), $size);
         $mform->setType('token', PARAM_NOTAGS);
@@ -99,7 +111,7 @@ class service_edit_form extends moodleform {
 
         /* Content type */
         $contenttype = [
-            'json'                  => 'application/json',
+            'json' => 'application/json',
             'x-www-form-urlencoded' => 'application/x-www-form-urlencoded',
         ];
 
@@ -117,7 +129,7 @@ class service_edit_form extends moodleform {
         foreach ($eventlist as $event) {
             /* Escaping event names */
             $eventname = base64_encode($event['eventname']);
-            $events[$event['component']][] =& $mform->createElement('checkbox', $eventname, $event['eventname']);
+            $events[$event['component']][] = &$mform->createElement('checkbox', $eventname, $event['eventname']);
         }
 
         /* Displays groups of items */
